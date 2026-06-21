@@ -1,0 +1,24 @@
+# Binários compilados e pacotes do plugin
+plugin.wasm
+*.ndp
+
+# Arquivos de log e depuração
+*.log
+nohup.out
+
+# Editor de texto e arquivos de swap
+*~
+.*.swp
+.DS_Store
+.vscode/
+.idea/
+
+# Caches do compilador Python e ambientes virtuais
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+env/
+venv/

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://raw.githubusercontent.com/navidrome/navidrome/refs/heads/master/plugins/manifest-schema.json",
+  "$id": "navidrome://plugins/manifest/spotify-sync",
+  "name": "spotify-sync",
+  "author": "Antigravity",
+  "version": "1.0.0",
+  "description": "Sincroniza automaticamente playlists do Spotify mapeadas no Lidarr para a biblioteca do Navidrome.",
+  "website": "https://github.com/Isa7q/spotify-playlist-sync",
+  "permissions": {
+    "http": {
+      "reason": "Para enviar comandos de sincronização ao serviço de sincronização executado no host",
+      "requiredHosts": [
+        "172.17.0.1",
+        "host.docker.internal",
+        "localhost",
+        "127.0.0.1",
+        "10.0.0.25",
+        "10.0.0.1",
+        "192.168.1.25",
+        "192.168.1.1"
+      ]
+    },
+    "scheduler": {
+      "reason": "Para agendar a sincronização diária de playlists"
+    }
+  },
+  "config": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "sidecarUrl": {
+          "type": "string",
+          "title": "URL do Serviço Sidecar",
+          "description": "A URL onde o serviço Python roda no host (ex: http://172.17.0.1:8090)",
+          "default": "http://172.17.0.1:8090"
+        },
+        "schedule": {
+          "type": "integer",
+          "title": "Hora de sincronização diária (0-23)",
+          "description": "A hora do dia (formato 24h) em que a sincronização periódica deve rodar.",
+          "minimum": 0,
+          "maximum": 23,
+          "default": 2
+        },
+        "checkOnStartup": {
+          "type": "boolean",
+          "title": "Sincronizar ao iniciar o Navidrome",
+          "default": true
+        }
+      },
+      "required": [
+        "sidecarUrl",
+        "schedule"
+      ]
+    },
+    "uiSchema": {
+      "type": "VerticalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/sidecarUrl"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/schedule"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/checkOnStartup"
+        }
+      ]
+    }
+  }
+}
